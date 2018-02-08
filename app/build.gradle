@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion '27.0.2'
     defaultConfig {
         applicationId "team.uptech.motionviews"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 3
         versionName "0.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -20,15 +20,22 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     // support
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.flipboard:bottomsheet-core:1.5.3'
+
+    // glide
+    implementation 'com.github.bumptech.glide:glide:4.6.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
 
     // color picker
     compile 'com.github.QuadFlask:colorpicker:0.0.13'
-
 
     // test
     testCompile 'junit:junit:4.12'

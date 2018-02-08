@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.os.Build;
@@ -32,7 +33,7 @@ import team.uptech.motionviews.widget.entity.MotionEntity;
  * Created on 9/29/16.
  */
 
-public class MotionView  extends FrameLayout {
+public class MotionView extends FrameLayout {
 
     private static final String TAG = MotionView.class.getSimpleName();
 
@@ -42,6 +43,7 @@ public class MotionView  extends FrameLayout {
 
     public interface MotionViewCallback {
         void onEntitySelected(@Nullable MotionEntity entity);
+
         void onEntityDoubleTap(@NonNull MotionEntity entity);
     }
 
@@ -132,13 +134,15 @@ public class MotionView  extends FrameLayout {
         }
     }
 
-    private void initEntityBorder(@NonNull MotionEntity entity ) {
+    private void initEntityBorder(@NonNull MotionEntity entity) {
         // init stroke
         int strokeSize = getResources().getDimensionPixelSize(R.dimen.stroke_size);
         Paint borderPaint = new Paint();
         borderPaint.setStrokeWidth(strokeSize);
         borderPaint.setAntiAlias(true);
-        borderPaint.setColor(ContextCompat.getColor(getContext(), R.color.stroke_color));
+        borderPaint.setStyle(Paint.Style.STROKE);
+        borderPaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
+        borderPaint.setColor(ContextCompat.getColor(getContext(), R.color.stroke_color_new));
 
         entity.setBorderPaint(borderPaint);
     }
@@ -164,6 +168,7 @@ public class MotionView  extends FrameLayout {
 
     /**
      * draws all entities on the canvas
+     *
      * @param canvas Canvas where to draw all entities
      */
     private void drawAllEntities(Canvas canvas) {
@@ -174,6 +179,7 @@ public class MotionView  extends FrameLayout {
 
     /**
      * as a side effect - the method deselects Entity (if any selected)
+     *
      * @return bitmap with all the Entities at their current positions
      */
     public Bitmap getThumbnailImage() {
