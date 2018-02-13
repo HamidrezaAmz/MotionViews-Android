@@ -5,23 +5,11 @@
     android:layout_height="match_parent"
     tools:context="team.uptech.motionviews.ui.AssetViewerActivity">
 
-    <com.flipboard.bottomsheet.BottomSheetLayout
-        android:id="@+id/bottomsheet"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></FrameLayout>
-    </com.flipboard.bottomsheet.BottomSheetLayout>
-
-    <Button
-        android:id="@+id/open"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="OPEN"
-        android:visibility="gone" />
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#852741"></FrameLayout>
 
 </RelativeLayout>

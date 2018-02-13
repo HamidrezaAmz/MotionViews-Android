@@ -1,6 +1,7 @@
 package team.uptech.motionviews.utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -47,6 +48,14 @@ public class Tools {
                 .load(Uri.parse("file:///android_asset/" + path))
                 .fitCenter()
                 .into(imageView);
+    }
+
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
     }
 
 }
