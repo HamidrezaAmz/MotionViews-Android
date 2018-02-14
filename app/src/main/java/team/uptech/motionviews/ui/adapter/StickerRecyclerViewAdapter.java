@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 import team.uptech.motionviews.R;
+import team.uptech.motionviews.interfaces.StickerViewCallBack;
 import team.uptech.motionviews.utils.Tools;
 
 /**
@@ -21,14 +22,15 @@ public class StickerRecyclerViewAdapter extends RecyclerView.Adapter<StickerRecy
     private ArrayList<String> listStickers;
     private Context context;
     private LayoutInflater mInflater;
-    private ItemClickListener mClickListener;
+    private StickerViewCallBack stickerViewCallBack;
     private String folderPrefix;
 
-    public StickerRecyclerViewAdapter(Context context, ArrayList<String> listStickers, String folderPrefix) {
+    public StickerRecyclerViewAdapter(Context context, ArrayList<String> listStickers, String folderPrefix, StickerViewCallBack stickerViewCallBack) {
         this.mInflater = LayoutInflater.from(context);
         this.context = context;
         this.listStickers = listStickers;
         this.folderPrefix = folderPrefix;
+        this.stickerViewCallBack = stickerViewCallBack;
     }
 
     @Override
@@ -49,18 +51,6 @@ public class StickerRecyclerViewAdapter extends RecyclerView.Adapter<StickerRecy
         return listStickers.size();
     }
 
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.mClickListener = itemClickListener;
-    }
-
-    public String getItem(int position) {
-        return listStickers.get(position);
-    }
-
-    public interface ItemClickListener {
-        void onItemClick(View view, int position);
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView SquareImageView;
 
@@ -72,7 +62,8 @@ public class StickerRecyclerViewAdapter extends RecyclerView.Adapter<StickerRecy
 
         @Override
         public void onClick(View view) {
-            if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
+            if (stickerViewCallBack != null)
+                stickerViewCallBack.onStickerSelected(folderPrefix + listStickers.get(getAdapterPosition()));
         }
     }
 

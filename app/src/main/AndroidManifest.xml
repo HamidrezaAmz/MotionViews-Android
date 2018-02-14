@@ -14,14 +14,20 @@
             android:name=".ui.StickerSelectActivity"
             android:label="@string/add_sticker" />
 
-        <activity android:name=".ui.TestActivity"></activity>
-
-        <activity android:name=".ui.AssetViewerActivity">
+        <activity android:name=".ui.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.AssetViewerActivity">
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.MAIN" />-->
+
+            <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
         </activity>
     </application>
 

@@ -9,10 +9,11 @@ import android.widget.FrameLayout;
 
 import team.uptech.motionviews.R;
 import team.uptech.motionviews.enums.enumHeight;
+import team.uptech.motionviews.interfaces.StickerViewCallBack;
 import team.uptech.motionviews.ui.fragments.fragmentAssetsViewer;
 import team.uptech.motionviews.utils.Tools;
 
-public class AssetViewerActivity extends AppCompatActivity {
+public class AssetViewerActivity extends AppCompatActivity implements StickerViewCallBack {
 
     FrameLayout frameLayout;
 
@@ -22,13 +23,11 @@ public class AssetViewerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_asset_viewer);
         frameLayout = findViewById(R.id.container);
 
-        setFragment(new fragmentAssetsViewer(this));
-
+        setFragment(new fragmentAssetsViewer(AssetViewerActivity.this, this));
         setHeight(enumHeight.HIGH);
     }
 
     protected void setFragment(Fragment fragment) {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction =
                 fragmentManager.beginTransaction();
@@ -53,4 +52,8 @@ public class AssetViewerActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onStickerSelected(String stickerPath) {
+
+    }
 }

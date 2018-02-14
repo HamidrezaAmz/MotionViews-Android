@@ -15,25 +15,28 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import team.uptech.motionviews.R;
+import team.uptech.motionviews.interfaces.StickerViewCallBack;
 import team.uptech.motionviews.ui.adapter.StickerTabsAdapter;
 
 /**
  * Created by Reza Amozadeh on 2/6/2018.
  */
 
-public class fragmentAssetsViewer extends Fragment {
+public class fragmentAssetsViewer extends Fragment implements StickerViewCallBack {
 
     Context context;
     String assetsFolderName = "sticker";
     String slash = "/";
+    StickerViewCallBack stickerViewCallBack;
 
     public fragmentAssetsViewer() {
         // Required empty public constructor
     }
 
     @SuppressLint("ValidFragment")
-    public fragmentAssetsViewer(Context context) {
+    public fragmentAssetsViewer(Context context, StickerViewCallBack stickerViewCallBack) {
         this.context = context;
+        this.stickerViewCallBack = stickerViewCallBack;
     }
 
     @Override
@@ -71,11 +74,21 @@ public class fragmentAssetsViewer extends Fragment {
             for (String folder : listfolders) {
                 String[] stickers = context.getAssets().list(assetsFolderName + slash + folder);
                 ArrayList<String> listStickers = new ArrayList<>(Arrays.asList(stickers));
-                adapter.addFragment(new fragmentStickerViewer(context, listStickers, assetsFolderName + slash + folder + slash), folder);
+                String prefix = assetsFolderName + slash + folder + slash;
+                adapter.addFragment(new fragmentStickerViewer(context,
+                                listStickers,
+                                prefix,
+                                this)
+                        , folder);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onStickerSelected(String stickerPath) {
+        stickerViewCallBack.onStickerSelected(stickerPath);
     }
 }
 
